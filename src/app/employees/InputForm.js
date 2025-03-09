@@ -41,11 +41,11 @@ const InputForm = () => {
           <div className="grid gap-2 mb-2 md:grid-cols-1">
             <div>
               <input type="file" id="assetFile" accept=".csv" onChange={handleFileChange}
-                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="bg-blue-300 focus:outline-none font-medium rounded-lg sm:w-auto px-5 py-2.5 text-center "
               />
             </div>
           </div>
-          <button onClick={uploadFile} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          <button onClick={uploadFile} className="bg-blue-300 hover:bg-blue-500 focus:outline-none font-medium rounded-lg sm:w-auto px-5 py-2.5 ">
             Check</button>
         </div>
       </div>
