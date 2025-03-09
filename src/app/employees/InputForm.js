@@ -9,20 +9,34 @@ const InputForm = () => {
   const router = useRouter();
 
   const uploadFile = async () => {
-    const fileBuffer = await csvFile.arrayBuffer();
+    try {
+      const fileBuffer = await csvFile.arrayBuffer();
+  
+      const response = await fetch(Constants.EMPLOYEES_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/octet-stream",
+        },
+        body: fileBuffer,
+      });
 
-    const response = await fetch(Constants.EMPLOYEES_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/octet-stream",
-      },
-      body: fileBuffer,
-    });
-
-    const data = await response.text();
-    localStorage.setItem("jsonData", data);
-    router.push("/view-result");
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        localStorage.setItem("errorMessage", errorMessage);
+        router.push("/error"); 
+        return;
+      }  
+  
+      const data = await response.text();
+      localStorage.setItem("jsonData", data);
+      router.push("/view-result");
+  
+    } catch (error) {    
+      localStorage.setItem("errorMessage", '{"message":"An unexpected error.. '+ error +'"}');
+      router.push("/error");
+    }
   };
+
 
   const handleFileChange = (event) => {
     const file = event.target?.files?.[0];
